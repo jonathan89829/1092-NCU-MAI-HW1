@@ -1,1 +1,2 @@
-# 1101-NCU-MAI-HW1
+# Modern Artificial Intelligence Homework 1
+The questions are in the file HW1.pdf.
