@@ -1,0 +1,87 @@
+clear
+M=tree;
+A=tree;
+B=tree;
+C=tree;
+D=tree;
+E=tree;
+F=tree;
+G=tree;
+H=tree;
+I=tree;
+J=tree;
+K=tree;
+L=tree;
+P=tree;
+M.name="M";
+M.parent=[];
+M.g=0;
+M.position=1;
+A.name="A";
+A.parent=M;
+A.g=M.g+2.3;
+A.position=1;
+B.name="B";
+B.parent=M;
+B.g=M.g+1.4;
+B.position=1;
+C.name="C";
+C.parent=M;
+C.g=M.g+0.9;
+C.position=1;
+D.name="D";
+D.parent=A;
+D.g=A.g+3.7;
+D.position=1;
+F.name="F";
+F.parent=[B,C];
+F.g=min(B.g+0.7,C.g+1.5);
+F.position=find([B.g+0.7,C.g+1.5]==F.g);
+E.name="E";
+E.parent=[B,F];
+E.g=min(B.g+1.0,F.g+1.8);
+E.position=find([B.g+1.0,F.g+1.8]==E.g);
+G.name="G";
+G.parent=C;
+G.g=C.g+1.5;
+G.position=1;
+H.name="H";
+H.parent=[D,E];
+H.g=min(D.g+2.3,E.g+1.3);
+H.position=find([D.g+2.3,E.g+1.3]==H.g);
+I.name="I";
+I.parent=[F,H];
+I.g=min(F.g+2.3,H.g+0.7);
+I.position=find([F.g+2.3,H.g+0.7]==I.g);
+J.name="J";
+J.parent=[G,I];
+J.g=min(G.g+4,I.g+1.7);
+J.position=find([G.g+4,I.g+1.7]==J.g);
+L.name="L";
+L.parent=J;
+L.g=J.g+1.5;
+L.position=1;
+K.name="K";
+K.parent=[H,I];
+K.g=min(H.g+1.5,I.g+1.4);
+K.position=find([H.g+1.5,I.g+1.4]==K.g);
+P.name="P";
+P.parent=[K,L];
+P.g=min(K.g+0.9,L.g+1.0);
+P.position=find([K.g+0.9,L.g+1.0]==P.g);
+
+m='';
+i=2;
+b=P;
+m(1)=P.name;
+while true
+    if length(b.parent)>=1
+        m(i)=b.parent(b.position).name;
+        b=b.parent(b.position);
+        i=i+1;
+    end
+    if length(b.parent)==0
+        break
+    end
+end
+fprintf(fliplr(m))
