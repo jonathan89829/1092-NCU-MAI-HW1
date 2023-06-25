@@ -1,0 +1,122 @@
+clear
+M=tree;
+A=tree;
+B=tree;
+C=tree;
+D=tree;
+E=tree;
+F=tree;
+G=tree;
+H=tree;
+I=tree;
+J=tree;
+K=tree;
+L=tree;
+P=tree;
+P.name="P";
+P.parent=[K,L];
+P.children=[];
+P.g=0;
+P.h=0;
+P.f=P.g+P.h;
+K.name="K";
+K.parent=[H,I];
+K.children=P;
+K.g=0;
+K.h=0.9;
+K.f=K.g+K.h;
+L.name="L";
+L.parent=J;
+L.children=P;
+L.g=0;
+L.h=1;
+L.f=L.g+L.h;
+J.name="J";
+J.parent=[G,I];
+J.children=L;
+J.g=0;
+J.h=1.56;
+J.f=J.g+J.h;
+I.name="I";
+I.parent=[F,H];
+I.children=[K,J];
+I.g=0;
+I.h=1.12;
+I.f=I.g+I.h;
+H.name="H";
+H.parent=[D,E];
+H.children=[I,K];
+H.g=0;
+H.h=1.56;
+H.f=H.g+H.h;
+G.name="G";
+G.parent=C;
+G.children=J;
+G.g=0;
+G.h=4.58;
+G.f=G.g+G.h;
+E.name="E";
+E.parent=[B,F];
+E.children=H;
+E.g=0;
+E.h=2.59;
+E.f=E.g+E.h;
+F.name="F";
+F.parent=[B,C];
+F.children=[E,H];
+F.g=0;
+F.h=3.34;
+D.name="D";
+D.parent=A;
+D.children=H;
+D.g=0;
+D.h=3.64;
+D.f=D.g+D.h;
+C.name="C";
+C.parent=M;
+C.children=[F,G];
+C.g=0;
+C.h=4.71;
+C.f=C.g+C.h;
+B.name="B";
+B.parent=M;
+B.children=[E,F];
+B.g=0;
+B.h=3.51;
+B.f=B.g+B.h;
+A.name="A";
+A.parent=M;
+A.children=D;
+A.g=0;
+A.h=5.86;
+A.f=A.g+A.h;
+M.name="M";
+M.parent=[];
+M.children=[A,B,C];
+M.g=0;
+M.h=4.85;
+M.f=M.g+M.h;
+
+q=queue;
+q=q.push(M);
+m='';
+l=1;
+while true
+    record=10000;
+    for i=1:length(q.value)
+        if q.value(i).h<record
+            index=i;
+            record=q.value(i).h;
+        end
+    end
+    m(l)=q.value(index).name;
+    l=l+1;
+    [q,b]=q.popCost(index);
+    if length(b.children)==0
+        break
+    end
+    for k=1:length(b.children)
+        q=q.push(b.children(k));
+    end
+end
+fprintf(m)
